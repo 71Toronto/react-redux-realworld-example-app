@@ -37,3 +37,14 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(2d705fd4-66d4-4297-85b4-26b2b63205cf)'
+    appType: 'webApp'
+    WebAppName: 'asdk'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'AzureDevops'
+    SlotName: 'production'
+    VirtualApplication: 'devops'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
